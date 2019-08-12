@@ -6,3 +6,4 @@
 using namespace std;
 
 void test();
+int add(int a, int b);

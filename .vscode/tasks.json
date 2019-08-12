@@ -4,18 +4,45 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build cpp on windows",
+      "label": "build",
       "type": "shell",
       "command": "g++",
       "args": [
         "-g",
         "${workspaceFolder}/main.cpp",
-        "${workspaceFolder}/cppfile/*.cpp",
+        "${workspaceFolder}/source/*.cpp",
         "-o",
         "${workspaceFolder}/compile/main.exe"
       ],
       "group": {
         "kind": "build",
+        "isDefault": true                          // 设为false可做到一个tasks.json配置多个编译指令，需要自己修改本文件，我这里不多提
+      },
+      "presentation": {
+        // Reveal the output only if unrecognized errors occur.
+        "reveal": "silent"
+      },
+      // Use the standard MS compiler pattern to detect errors, warnings and infos
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-g",
+        "${workspaceFolder}/main.cpp",
+        "${workspaceFolder}/source/*.cpp",
+        "-o",
+        "${workspaceFolder}/compile/main.exe",
+        "-lgtest",
+        "-lgtest_main",
+        "-lpthread",
+        "-static-libgcc",
+        "-std=c++17"
+      ],
+      "group": {
+        "kind": "test",
         "isDefault": true                          // 设为false可做到一个tasks.json配置多个编译指令，需要自己修改本文件，我这里不多提
       },
       "presentation": {
