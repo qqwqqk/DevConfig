@@ -1,2 +1,2 @@
 # DevConfig
-Development Environment Configuration
+C++ development environment configuration on windows
