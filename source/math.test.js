@@ -9,7 +9,10 @@ function random(){
 };
 
 test('test 1 plus 2 result',()=>{
-  
-  console.log(random());
+  var regex = /^[a-zA-Z]:\\([^\\:*<>|"?\r\n/"]+\\)*([^\\:*<>|"?\r\n/"]+)?$/;
+  console.log(regex.test("F:\\study\\java\\regex\\regu exp.pdf"));
+  console.log(regex.test("F:\\study\\java\\regex\\"));
+  console.log(regex.test("F:\\study\\java"));
+  console.log(regex.test("F:\\"));
   expect(1).toBeTruthy();
 })

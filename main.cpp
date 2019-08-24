@@ -1,39 +1,63 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
+#include <string>
+#include <map>
+#include <set>
 using namespace std;
 
-//沈诗
+class Name{
+public:
+	string _str1, _str2;
+	Name(string str1, string str2){
+		_str1 = str1; _str2 = str2;
+	}
+};
 
-bool is_prime(int n){
-	int stop = n / 6 + 1, Tstop = sqrt(n) + 5;
-	if (n == 2 || n == 3 || n == 5 || n == 7 || n == 11) {
-		return true;
-	}
-	if (n % 2 == 0 || n % 3 == 0 || n % 5 == 0 || n == 1) {
-		return false;
-	}
-	for (unsigned long long i = 1; i <= stop; i++) {
-		if (i * 6 >= Tstop) { break; }
-		if ((n % (i * 6 + 1) == 0) || (n % (i * 6 + 5) == 0)) {
-			return false;
+set<string> getName(map<string, int> names){
+	set<string> res;
+	int max = 0;
+	for (map<string, int>::iterator iter = names.begin(); iter != names.end(); iter++){
+		if (iter->second > max){
+			res.clear();
+			res.insert(iter->first);
+		}
+		if (iter->second == max){
+			res.insert(iter->first);
 		}
 	}
-	return true;
+	if (max == 0){ res.clear(); }
+	return res;
 }
 
+
 int main(){
-	int n;
-	int count = 0;
+	map<string, int> names;
+	vector<Name> lists;
+	set<string> res;
+	string str1, str2;
+	while (cin >> str1 >> str2){
+		cout << '\t' << '\t' << str1 << str2 << endl;
+		Name item(str1,str2);
+		lists.push_back(item);
+		map<string, int>::iterator iter = names.find(str1);
+		if ( iter != names.end()){ names.insert(pair<string, int>(str1, 1)); }
+		else { iter->second += 1; }
+	}
 
 	while (1){
-		cout << "\nbegin:" << endl;
-		count = 0;
-		cin >> n;
-		for (int i = 1; i <= n; i++){
-			if (is_prime(i)){ count++; }
+		res = getName(names);
+		if (res.size() < 1){ break; }
+		for (int i = 0; i < lists.size(); i++){
+			if (res.count(lists[i]._str1)>0){
+				cout << lists[i]._str1 << " " << lists[i]._str2 << endl;
+			}
 		}
-		cout << n - count - 1 << endl;
+		for (set<string>::iterator val = res.begin(); val != res.end(); val++){
+			names.find(*val)->second = 0;
+		}
 	}
+
+	cout << "end" << endl;
+
 	return 0;
 }
