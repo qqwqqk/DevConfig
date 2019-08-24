@@ -1,15 +1,13 @@
 #include <iostream>
-#include <cstdlib>
-#include "header/func.h"
+#include <map>
+#include <set>
+#include <vector>
 using namespace std;
 
 int main()
 {
-  int a,b,c;
-  a=2;
-  b=3;
-  c=add(a,b);
+  int a=1;
   
-  cout << c<< endl;
+  cout << a << endl;
   return 0;
 }
