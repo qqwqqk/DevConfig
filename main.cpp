@@ -3,6 +3,8 @@
 #include <cmath>
 using namespace std;
 
+//沈诗
+
 bool is_prime(int n){
 	int stop = n / 6 + 1, Tstop = sqrt(n) + 5;
 	if (n == 2 || n == 3 || n == 5 || n == 7 || n == 11) {
