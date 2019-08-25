@@ -4,13 +4,12 @@
 using namespace std;
 
 int main(){
-
-  test();
-
   //文件处理
-  string net = "ST";
+  string net = "WR";
   string inte = "E";
-  int num = 2500;
-  string type = "B";
-  //deltag(net, inte, num, type);
+  int num = 10000;
+  string type = "A";
+  deltag(net, inte, num, type);
+
+  cout<<"init network: " << net << type << inte << num  <<endl;
 }

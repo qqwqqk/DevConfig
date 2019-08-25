@@ -6,8 +6,8 @@ using namespace std;
 void deltag(string net, string inte, int num, string type){
   const char dilem = ',';
   const char split = ' ';
-  const string readpath = "metadata/netdata/Metadata_" + net + "_Single" + type + "_" + inte + to_string(num) + "CS.txt";
-  const string writepath = "metadata/outdata/Edgelist_" + net  + "_" + type + "_" + inte + to_string(num) + ".txt";
+  const string readpath = "dataset/netdata/Metadata_" + net + "_Single" + type + "_" + inte + to_string(num) + "CS.txt";
+  const string writepath = "dataset/outdata/Edgelist_" + net  + "_" + type + "_" + inte + to_string(num) + ".txt";
 
   ifstream infile;
   ofstream outfile;
