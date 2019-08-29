@@ -4,12 +4,12 @@
 using namespace std;
 
 int main(){
-	
+
 	int n = 0;
 	int max = 0;
 	set<char> pass;
 	vector<int> nums;
-	vector<char> tags = {'A','B','C','D','E','F','G','H','I','J','K','L','M'};
+	vector<char> tags = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 
 	cin >> n;
 	for (int i = 0; i < n; i++){
@@ -21,6 +21,7 @@ int main(){
 		int temp;
 		cin >> temp;
 		nums.push_back(temp);
+		if (pass.count(tags[i]) > 0){ temp = 0; }
 		max = max > temp ? max : temp;
 	}
 
