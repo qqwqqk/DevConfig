@@ -82,7 +82,7 @@ int main(){
 		result.push_back(subNetwork);
 	}
 
-	cout << result.size() << endl;
+	cout << result.size() - 1 << endl;
 
 	return 0;
 }
