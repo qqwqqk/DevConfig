@@ -1,36 +1,34 @@
 #include <iostream>
 #include <set>
+#include <map>
+#include <string>
 #include <vector>;
 using namespace std;
 
 int main(){
 
-	int n = 0;
+	map<char, int> lists;
+	string str;
+	cin >> str;
+
 	int max = 0;
-	set<char> pass;
-	vector<int> nums;
-	vector<char> tags = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
-
-	cin >> n;
+	int n = str.length();
 	for (int i = 0; i < n; i++){
-		char temp;
-		cin >> temp;
-		pass.insert(temp);
-	}
-	for (int i = 0; i < 13; i++){
-		int temp;
-		cin >> temp;
-		nums.push_back(temp);
-		if (pass.count(tags[i]) > 0){ temp = 0; }
-		max = max > temp ? max : temp;
-	}
-
-	for (int i = 0; i < 13; i++){
-		if (nums[i] == max){
-			cout << tags[i] << endl;
-			break;
+		char temp = str[i];
+		map<char, int>::iterator item = lists.find(temp);
+		if (item == lists.end()){
+			int count = 1;
+			max = max > count ? max : count;
+			lists.insert(pair<char, int>(temp, 1));
+		}
+		else {
+			int count = item->second + 1;
+			max = max > count ? max : count;
+			item->second = count;
 		}
 	}
+
+	cout << max << endl;
 
 	return 0;
 }

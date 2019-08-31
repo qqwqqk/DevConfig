@@ -9,12 +9,6 @@ function random(){
 };
 
 test('test 1 plus 2 result',()=>{
-  (function(x){
-    return (function(y){
-      console.log((function(z){
-        return y
-      })(3));
-    })(2)
-  })(1);
+  console.log()
   expect(1).toBeTruthy();
 })
