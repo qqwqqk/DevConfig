@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>;
 using namespace std;
@@ -15,21 +16,14 @@ public:
 	};
 };
 
-map<int, int> getresult(vector<int> xlist, map<int, company> lists){
+map<int, int> getresult(set<int> xlist, map<int, company> lists){
 	int company_id, company_price;
-	int maxval = 0;
-	for (int i = 0; i < xlist.size(); i++){
-		company iter = lists.find(xlist[i])->second;
-		int temp = iter.price.back();
-		maxval = maxval > temp ? maxval : temp;
-		lists.erase(xlist[i]);
-	}
 
 	int max = 0;
 	if (lists.size() > 0){
 		for (map<int, company>::iterator iter = lists.begin(); iter != lists.end(); iter++){
 			int val = iter->second.price.back();
-			if (max <= val){ 
+			if (max <= val && xlist.count(iter->first) < 1){ 
 				max = val; 
 				company_id = iter->first;
 				company_price = val;
@@ -63,13 +57,13 @@ int main(){
 
 	cin >> q;
 	int leng = 0;
-	vector<int> xlist;
+	set<int> xlist;
 	int max = 0;
 	for (int i = 0; i<n; i++){
 		cin >> leng;
 		for (int i = 0; i<leng; i++){
 			cin >> num;
-			xlist.push_back(num);
+			xlist.insert(num);
 		}
 
 		map<int, int> result = getresult(xlist, lists);
