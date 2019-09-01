@@ -2,36 +2,60 @@
 #include <vector>
 #include <map>
 #include <set>
-#include <vector>;
+#include <vector>
+#include <algorithm>
 using namespace std;
+
+class people{
+public:
+  int a,b;
+  int rank;
+  int pos;
+  people(int _a, int _b){
+    a=_a; b=_b;
+    rank = _b - _a;
+    pos = -1;
+  }
+};
+
+bool sortFun(const people &p1, const people &p2){
+  if(p1.rank == p2.rank){
+    return p1.a < p2.a;
+  } else {
+    return p1.rank < p2.rank;
+  }
+}
+
+int satisfaction(int a,int b, int j, int n){
+  int result;
+  result = a * (j-1) + b *(n-j);
+  return result;
+}
 
 int main(){
 
-  int n,m;
-  cin>>n>>m;
+  int n,a,b;
 
-  int box_1 = 0;
-  int box_2 = 0;
-  int key_1 = 0;
-  int key_2 = 0;
+  vector<people> lists;
 
-  int temp;
+  cin>>n;
+  for(int i=0; i<n;i++){
+    cin >> a >> b;
 
+    people item(a,b);
+    lists.push_back(item);
+  }
+
+  sort(lists.begin(), lists.end(), sortFun);
+
+  int result = 0;
+  int temp = 0;
   for(int i=0; i<n; i++){
-    cin >> temp;
-    if(temp % 2 == 1){box_1++;} else {box_2++;}
+    temp = satisfaction(lists[i].a, lists[i].b, i+1, n);
+    result += temp;
   }
 
-  for(int i=0; i<m; i++){
-    cin >> temp;
-    if(temp % 2 == 1){key_1++;} else {key_2++;}
-  }
-
-  int open_1 = key_1 < box_1 ? key_1 : box_1;
-  int open_2 = key_2 < box_2 ? key_2 : box_2;
-
-  int result = open_1+open_2;
-  cout<<result<<endl;
+  cout<< result <<endl;
 
 	return 0;
 }
