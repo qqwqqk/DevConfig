@@ -5,84 +5,33 @@
 #include <vector>;
 using namespace std;
 
-class Edge{
-public:
-	int role, lang;
-	Edge(int r, int l){ role = r; lang = l;}
-};
-
-class Network{
-public:
-	set<int> nodeA;
-	set<int> nodeB;
-};
-
 int main(){
-	vector<Edge> edgeCache;
-	set<int> nodeCacheA;
-	set<int> nodeCacheB;
-	vector<Network> result;
-	int n = 0, m = 0, k = 0;
-	cin >> n >> m >> k;
 
-	for (int i = 0; i < k; i++){
-		int a, b;
-		cin >> a >> b;
-		Edge item(a,b);
-		edgeCache.push_back(item);
-		nodeCacheA.insert(a);
-		nodeCacheB.insert(b);
-	}
+  int n,m;
+  cin>>n>>m;
 
-	while (!nodeCacheA.empty() && !nodeCacheB.empty()){
-		Network subNetwork;
-		set<int>::iterator iter = nodeCacheA.begin();
-		subNetwork.nodeA.insert(*iter);
-		nodeCacheA.erase(iter);
-		int length = 0;
+  int box_1 = 0;
+  int box_2 = 0;
+  int key_1 = 0;
+  int key_2 = 0;
 
-		while (1){
-			length = subNetwork.nodeB.size();
+  int temp;
 
-			for (int i = 0; i < edgeCache.size();){
-				iter = subNetwork.nodeA.find(edgeCache[i].role);
-				if (iter != subNetwork.nodeA.end()){
-					iter = subNetwork.nodeB.find(edgeCache[i].lang);
-					if (iter == subNetwork.nodeB.end()){ subNetwork.nodeB.insert(edgeCache[i].lang); }
+  for(int i=0; i<n; i++){
+    cin >> temp;
+    if(temp % 2 == 1){box_1++;} else {box_2++;}
+  }
 
-					iter = nodeCacheB.find(edgeCache[i].lang);
-					if (iter != nodeCacheB.end()){ nodeCacheB.erase(iter); }
+  for(int i=0; i<m; i++){
+    cin >> temp;
+    if(temp % 2 == 1){key_1++;} else {key_2++;}
+  }
 
-					edgeCache.erase(edgeCache.begin() + i);
-				}
-				else {
-					i++;
-				}
-			}
+  int open_1 = key_1 < box_1 ? key_1 : box_1;
+  int open_2 = key_2 < box_2 ? key_2 : box_2;
 
-			if (subNetwork.nodeB.size() == length){ break; }
-			
-			for (int i = 0; i < edgeCache.size();){
-				iter = subNetwork.nodeB.find(edgeCache[i].lang);
-				if (iter != subNetwork.nodeB.end()){
-					iter = subNetwork.nodeA.find(edgeCache[i].role);
-					if (iter == subNetwork.nodeA.end()){ subNetwork.nodeA.insert(edgeCache[i].role); }
-
-					iter = nodeCacheA.find(edgeCache[i].role);
-					if (iter != nodeCacheA.end()){ nodeCacheA.erase(iter); }
-
-					edgeCache.erase(edgeCache.begin() + i);
-				}
-				else {
-					i++;
-				}
-			}
-
-			}
-		result.push_back(subNetwork);
-	}
-
-	cout << result.size() - 1 << endl;
+  int result = open_1+open_2;
+  cout<<result<<endl;
 
 	return 0;
 }
